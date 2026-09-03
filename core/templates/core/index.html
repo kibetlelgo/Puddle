@@ -9,11 +9,8 @@
 
     <!-- Slideshow background -->
     <div class="absolute inset-0 z-0">
-        <div class="slide" style="background-image: url('/media/item_images/jacket.jpeg');"></div>
-        <div class="slide" style="background-image: url('/media/item_images/sofa.jpeg'); animation-delay: -5s;"></div>
-        <div class="slide" style="background-image: url('/media/item_images/shoes.jpeg'); animation-delay: -10s;"></div>
-        <div class="slide" style="background-image: url('/media/item_images/hoodie.jpg'); animation-delay: -15s;"></div>
-        <div class="slide" style="background-image: url('/media/item_images/chair.jpeg'); animation-delay: -20s;"></div>
+        <div class="slide" style="background-image: url('/media/item_images/sofa%201.jpg');"></div>
+        <div class="slide" style="background-image: url('/media/item_images/sofa%202.jpg'); animation-delay: -12s;"></div>
         <!-- Dark overlay so text stays readable -->
         <div class="absolute inset-0 bg-gradient-to-r from-gray-950/85 via-gray-900/70 to-teal-900/60"></div>
     </div>
@@ -23,9 +20,10 @@
             position: absolute;
             inset: 0;
             background-size: cover;
+            background-repeat: no-repeat;
             background-position: center;
             opacity: 0;
-            animation: heroSlide 25s infinite;
+            animation: heroSlide 24s infinite;
         }
         @keyframes heroSlide {
             0%   { opacity: 0; transform: scale(1.04); }
@@ -109,26 +107,24 @@
     </div>
 
     {% if items %}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6">
         {% for item in items %}
-        <a href="{% url 'item:detail' item.id %}" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 card-hover block">
-            <div class="h-52 overflow-hidden bg-gray-100">
-                {% if item.image %}
-                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                {% else %}
-                    <div class="w-full h-full flex items-center justify-center text-gray-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                {% endif %}
-            </div>
-            <div class="p-5">
+        <a href="{% url 'item:detail' item.id %}" class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 card-hover block mb-6 break-inside-avoid">
+            {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
+            {% else %}
+                <div class="w-full h-48 flex items-center justify-center text-gray-200 bg-gray-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+            {% endif %}
+            <div class="p-4">
                 <div class="flex justify-between items-start gap-2">
-                    <h3 class="font-semibold text-gray-900 text-base leading-snug">{{ item.name }}</h3>
+                    <h3 class="font-semibold text-gray-900 text-sm leading-snug">{{ item.name }}</h3>
                     <span class="shrink-0 text-teal-600 font-bold text-sm bg-teal-50 px-2 py-1 rounded-lg">KSh {{ item.price }}</span>
                 </div>
-                <p class="text-xs text-gray-400 mt-2">{{ item.category.name }}</p>
+                <p class="text-xs text-gray-400 mt-1">{{ item.category.name }}</p>
             </div>
         </a>
         {% endfor %}
@@ -242,7 +238,7 @@
         <div class="hidden md:flex flex-1 justify-end items-end h-full pr-8 absolute right-0 bottom-0">
             <img src="/media/item_images/shoes.jpeg"
                  alt="Sell on Puddle"
-                 class="h-72 w-auto object-contain drop-shadow-2xl"
+                 class="h-96 w-auto object-contain drop-shadow-2xl"
                  style="transform: rotate(8deg) translateY(-16px);">
         </div>
 
